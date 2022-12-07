@@ -17,7 +17,11 @@ class UserSerializer(serializers.ModelSerializer):
         data['password'] = validated_data['password']
         data['email'] = validated_data['email']
 
-        return self.Meta.model.objects.create_user(**data)
+        user = self.Meta.model.objects.create_user(**data)
+        if user.id != None:
+            models.Profile.objects.create(name=user.name, user=user)
+
+        return user
 
     def update(self, instance, validated_data):
         instance.name = validated_data.get('name')
@@ -38,7 +42,24 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class ProfileSerializer(serializers.ModelSerializer):
+    user_id = serializers.PrimaryKeyRelatedField(
+        queryset=get_user_model().objects.all(), write_only=True)
+    user = UserSerializer(read_only=True)
+
+    def create(self, validated_data):
+        data = {}
+        data['name'] = validated_data.get('name')
+        data['user'] = validated_data.get('user_id')
+        data['type'] = validated_data.get('type')
+
+        return self.Meta.model.objects.create(**data)
+
+    def update(self, instance, validated_data):
+        instance.name = validated_data.get('name')
+        instance.type = validated_data.get('type')
+        instance.save()
+        return instance
 
     class Meta:
-        fields = '__all__'
+        fields = ['id', 'name', 'type', 'user_id', 'user']
         model = models.Profile
