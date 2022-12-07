@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'scrud',
     'drf_spectacular',
     'netflix',
+    'rest_framework.authtoken',
 ]
 
 MIDDLEWARE = [
