@@ -28,7 +28,7 @@ class UserSerializer(serializers.ModelSerializer):
         return instance
 
     class Meta:
-        fields = '__all__'
+        fields = ['id', 'name', 'tel', 'email', 'is_staff', 'is_active']
         model = get_user_model()
 
 

@@ -10,12 +10,13 @@ urlpatterns = [
         ])),
         path('user/', include([
             path('', views.UserViewset.as_view(
-                {'get': 'list', 'post': 'create'})),
+                {'get': 'list', 'post': 'create'}), name='list_users'),
             path('<int:pk>/', views.UserViewset.as_view({'get': 'get'})),
             path('<int:pk>/edit/', views.UserViewset.as_view({'put': 'edit'})),
             path('<int:pk>/delete/',
                  views.UserViewset.as_view({'delete': 'delete'})),
-            path('search/', views.UserViewset.as_view({'get': 'search'})),
+            path(
+                'search/', views.UserViewset.as_view({'get': 'search'}), name='user-search'),
         ])),
 
         path('profile/', include([
