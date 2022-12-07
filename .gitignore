@@ -1,0 +1,5 @@
+backend/env
+backend/core/core/__pycache__
+backend/core/netflix/__pycache__
+backend/core/netflix/migrations/__pycache__
+frontend/netflix/node_modules
