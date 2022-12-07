@@ -13,7 +13,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         data = {}
-        data['name'] = validated_data['password']
+        data['name'] = validated_data['name']
         data['password'] = validated_data['password']
         data['email'] = validated_data['email']
 
