@@ -24,6 +24,8 @@ export default function List({title, fetchUrl, }) {
         fetchMovies(fetchUrl)
     }, [fetchUrl])
     return (
-        <div>{title.toUpperCase()}</div>
+        <div className='flex'>
+            <h3 className='text-2xl'>{title.toUpperCase()}</h3>
+        </div>
     )
 }
