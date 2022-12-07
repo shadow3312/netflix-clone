@@ -17,6 +17,7 @@ class MyUser(AbstractBaseUser, PermissionsMixin):
     class Meta:
         managed = True
         db_table = 'auth_user'
+        ordering = ['id']
 
     def natural_key(self):
         return self.email

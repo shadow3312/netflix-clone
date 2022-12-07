@@ -10,13 +10,14 @@ class LoginSerializer(serializers.ModelSerializer):
 
 
 class UserSerializer(serializers.ModelSerializer):
+
     def create(self, validated_data):
         data = {}
         data['name'] = validated_data['password']
         data['password'] = validated_data['password']
         data['email'] = validated_data['email']
 
-        return self.Meta.model.create_user(**data)
+        return self.Meta.model.objects.create_user(**data)
 
     def update(self, instance, validated_data):
         instance.name = validated_data.get('name')
@@ -28,8 +29,12 @@ class UserSerializer(serializers.ModelSerializer):
         return instance
 
     class Meta:
-        fields = ['id', 'name', 'tel', 'email', 'is_staff', 'is_active']
+        fields = ['id', 'name', 'tel', 'email',
+                  'password', 'is_staff', 'is_active']
         model = get_user_model()
+        extra_kwargs = {
+            'password': {'write_only': True}
+        }
 
 
 class ProfileSerializer(serializers.ModelSerializer):

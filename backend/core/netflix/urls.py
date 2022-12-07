@@ -11,23 +11,27 @@ urlpatterns = [
         path('user/', include([
             path('', views.UserViewset.as_view(
                 {'get': 'list', 'post': 'create'}), name='list_users'),
-            path('<int:pk>/', views.UserViewset.as_view({'get': 'get'})),
-            path('<int:pk>/edit/', views.UserViewset.as_view({'put': 'edit'})),
+            path('<int:pk>/',
+                 views.UserViewset.as_view({'get': 'get'}), name='get_user'),
+            path('<int:pk>/edit/',
+                 views.UserViewset.as_view({'put': 'edit'}), name='edit_user'),
             path('<int:pk>/delete/',
-                 views.UserViewset.as_view({'delete': 'delete'})),
+                 views.UserViewset.as_view({'delete': 'delete'}), name='delete_user'),
             path(
-                'search/', views.UserViewset.as_view({'get': 'search'}), name='user-search'),
+                'search/', views.UserViewset.as_view({'get': 'search'}), name='search_user'),
         ])),
 
         path('profile/', include([
             path('', views.ProfileViewset.as_view(
-                {'get': 'list', 'post': 'create'})),
-            path('<int:pk>/', views.ProfileViewset.as_view({'get': 'get'})),
+                {'get': 'list', 'post': 'create'}), name='list_profile'),
+            path(
+                '<int:pk>/', views.ProfileViewset.as_view({'get': 'get'}), name='get_profile'),
             path('<int:pk>/edit/',
-                 views.ProfileViewset.as_view({'put': 'edit'})),
+                 views.ProfileViewset.as_view({'put': 'edit'}), name='edit_profile'),
             path('<int:pk>/delete/',
-                 views.ProfileViewset.as_view({'delete': 'delete'})),
-            path('search/', views.ProfileViewset.as_view({'get': 'search'})),
+                 views.ProfileViewset.as_view({'delete': 'delete'}), name='delete_profile'),
+            path(
+                'search/', views.ProfileViewset.as_view({'get': 'search'}), name='search_profile'),
         ]))
 
     ]))
