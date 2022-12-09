@@ -1,0 +1,53 @@
+.card {
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    width: 14rem;
+    height: 9rem;
+    border-radius: 0.28rem;
+    margin-right: 0.3rem;
+    transition: all 300ms ease;
+  
+    &:hover {
+      transform: scale(1.45);
+      box-shadow: 0 0 1rem rgba(0, 0, 0, 0.6), 0 6px 6px rgba(0, 0, 0, 0.5);
+      z-index: 9999;
+
+      .main {
+        z-index: 5;
+      }
+
+      body, html {
+        z-index: 5;
+      }
+  
+      .cardPoster {
+        height: 55%;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+      .cardInfo {
+        box-shadow: 0 0 1rem rgba(0, 0, 0, 0.75), 0 6px 6px rgba(0, 0, 0, 0.5);
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+      }
+    }
+  
+    .cardPoster {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 0.28rem;
+    }
+  
+    .cardInfo {
+      min-height: fit-content;
+      background-color: '#111';
+      border-bottom-left-radius: 0.28rem;
+      border-bottom-right-radius: 0.28rem;
+      display: none;
+      padding: 0.4rem;
+      font-size: inherit;
+    }
+  }

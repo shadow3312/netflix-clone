@@ -10,7 +10,10 @@ const requests = {
 	getComedyMovies: `/discover/movie?api_key=${API_KEY}&with_genres=35`,
 	getHorrorMovies: `/discover/movie?api_key=${API_KEY}&with_genres=27`,
 	getRomanceMovies: `/discover/movie?api_key=${API_KEY}&with_genres=10749`,
-	fetchDocumentaries: `/discover/movie?api_key=${API_KEY}&with_genres=99`
+	getDocumentaries: `/discover/movie?api_key=${API_KEY}&with_genres=99`,
+	getKidMovies: `/discover/movie?api_key=${API_KEY}&certification_country=US&certification.lte=G&sort_by=popularity.desc`,
+	getDramaMovies: `/discover/movie?api_keyl8=${API_KEY}&with_genres=18&sort_by=vote_average.desc&vote_count.gte=10`,
+	getSciFiMovie: `/discover/movie?api_key=${API_KEY}&with_genres=878&sort_by=vote_average.desc`
 };
 
 export default requests;
