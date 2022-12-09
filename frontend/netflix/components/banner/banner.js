@@ -30,6 +30,10 @@ export default function Banner({fetchUrl}) {
         setTopMovie(movie)
     }
 
+    const iconStyle = {
+        size: '1em'
+    }
+
     useEffect(() => {
         pickRandomImage(movies)
     }, [movies])
@@ -44,8 +48,9 @@ export default function Banner({fetchUrl}) {
                 <h1 className='text-6xl text-white drop-shadow-lg font-bold mb-4'>{topMovie && (topMovie.title || topMovie.name)}</h1>
                 <p className='text-white text-xl font-semibold'>{topMovie && shortenString(topMovie.overview, 150)}</p>
                 <div className='flex'>
-                    <Button text="Play" bgColor='#fff' iconName='play' />
-                    <Button text="More info" bgColor='rgba(109, 109, 109, 0.7)' iconName='info' />
+                    <Button text="Play" bgColor='#fff' iconName='play'
+                    iconStyle={iconStyle} />
+                    <Button text="More info" bgColor='rgba(109, 109, 109, 0.7)' iconName='info' iconStyle={iconStyle} />
                 </div>
             </div>
             <div className='gradient__bottom'></div>
