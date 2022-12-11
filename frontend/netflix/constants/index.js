@@ -1,6 +1,6 @@
 const API_URL = 'http://localhost:8000';
 const IMDB_API_AKEY = 'b7eff31063043bf7b8120bc59dd95420'
-
+const BASE_IMG_URL = "https://image.tmdb.org/t/p/original"
 const GENRES = [
     {
         id: 28,
@@ -79,4 +79,4 @@ const GENRES = [
         name: 'Western'
     }
 ]
-export {API_URL, IMDB_API_AKEY, GENRES}
+export {API_URL, IMDB_API_AKEY, GENRES, BASE_IMG_URL}

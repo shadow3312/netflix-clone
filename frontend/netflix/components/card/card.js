@@ -9,6 +9,9 @@ import { selectedMovieAtom, showMovieDetailAtom } from '../../state/atoms'
 import { processGenres } from '../../utils'
 const base_url = "https://image.tmdb.org/t/p/original"
 
+const customLoader = ({ src, width, quality }) => {
+  return `https://s3.amazonaws.com/demo/image/${src}?w=${width}&q=${quality || 75}`
+}
 
 export default function Card({movie, isLarge}) {
   const router = useRouter()
@@ -27,7 +30,6 @@ export default function Card({movie, isLarge}) {
   const handleShowDetail = () => {
     setShowDetail(true)
     setSelectedMovie(movie)
-    console.log(showDetail)
   }
 
   const iconStyle = {
@@ -45,6 +47,8 @@ export default function Card({movie, isLarge}) {
             fill={fill}
             style={{objectFit: 'cover', borderRadius: 5}}
             className={`${styles.cardPoster} `}
+            blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkMjOrBwABnwDvKNsECgAAAABJRU5ErkJggg=='
+            placeholder="blur"
         />
         <div className={styles.cardInfo}>
           <h3 className='text-white text-xs font-bold mb-2'>{movie.title || movie.name}</h3>

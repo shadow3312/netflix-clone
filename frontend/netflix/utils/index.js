@@ -1,4 +1,4 @@
-import { IoIosAdd, IoIosArrowDown, IoIosInformationCircleOutline, IoMdPlay, IoMdThumbsDown, IoMdThumbsUp } from 'react-icons/io';
+import { IoIosAdd, IoIosArrowDown, IoIosHeart, IoIosInformationCircleOutline, IoMdPlay, IoMdThumbsDown, IoMdThumbsUp } from 'react-icons/io';
 import { IconContext } from "react-icons";
 import { GENRES } from '../constants';
 import { Rating } from 'flowbite-react';
@@ -56,6 +56,13 @@ const processIcon = (iconName, style) => {
                     <IoIosArrowDown />
                 </IconContext.Provider>
             )
+        
+        case 'favorite':
+            return (
+                <IconContext.Provider value={style}>
+                    <IoIosHeart />
+                </IconContext.Provider>
+            )
     }
 }
 
@@ -64,8 +71,8 @@ const processGenres = (ids) => {
       GENRES.map((genre, i) => {
         if (ids?.includes(genre.id)) {
           return (
-          <div key={i} className='mr-0.5 bg-netflix-red hover:bg-[#AF0000] text-blue-800 text-xs font-semibold px-2.5 py-0.1 pb-0.5 rounded-2xl'>
-            <span key={i} className="text-white text-[10px] font-medium">{genre.name}</span>
+          <div key={i} className='mr-0.5 bg-netflix-red hover:bg-[#AF0000] text-blue-800 text-xs font-semibold px-2.5 py-0.1 pb-0.5 rounded-2xl' style={{backgroundColor: '#D81F26', marginRight: 2, paddingLeft: 10, paddingRight: 10 }}>
+            <span className="text-white text-[10px] font-medium">{genre.name}</span>
           </div>
         )}
       })
