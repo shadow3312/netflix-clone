@@ -35,7 +35,6 @@ export default function Card({movie, isLarge, isRated, index}) {
   }
   
   return (
-    console.log(movie),
     <>
       <div className={`${styles.card} mb-12 mr-2 ${isLarge ? `w-56 h-36`: styles.long} cursor-pointer relative transition-transform duration-500 ${isRated && styles.rated}`} onMouseOver={handleHover} onMouseLeave={() => setFill(true)} onClick={() => handleShowDetail()}>
           <div className='h-1/2 flex justify-between'>
