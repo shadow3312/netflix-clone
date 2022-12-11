@@ -1,12 +1,37 @@
+.long {
+  height: 18rem !important;
+  border-radius: 20px;
+  width: 12rem !important;
+  padding-bottom: 0 !important;
+}
+
+.rated {
+  width: 8rem !important;
+  height: 10rem !important;
+  margin-left: 3rem;
+  &:hover {
+    width: 14rem !important;
+  }
+
+}
+
+.text__rated {
+  font-size: 14rem;
+  -webkit-text-stroke: 2px rgb(162, 148, 183);
+  -webkit-text-fill-color: #000;
+  margin-top: -4rem;
+  margin-left: -1rem;
+}
 .card {
     display: flex;
     flex-direction: column;
     flex-shrink: 0;
     width: 14rem;
-    height: 9rem;
+    height: 10rem;
     border-radius: 0.28rem;
     margin-right: 0.3rem;
     transition: all 300ms ease;
+    padding-bottom: 40px;
   
     &:hover {
       transform: scale(1.45);
@@ -14,7 +39,7 @@
       z-index: 45;
   
       .cardPoster {
-        height: 55%;
+        height: 100%;
         border-bottom-left-radius: 0;
         border-bottom-right-radius: 0;
       }
@@ -23,6 +48,8 @@
         display: flex;
         flex-direction: column;
         height: 100%;
+        margin: 0;
+        background-color: #01060C;
       }
     }
   
@@ -40,6 +67,7 @@
       border-bottom-right-radius: 0.28rem;
       display: none;
       padding: 0.4rem;
+      padding-bottom: 1.2rem;
       font-size: inherit;
     }
   }

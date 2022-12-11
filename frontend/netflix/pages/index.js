@@ -26,7 +26,7 @@ export default function Home() {
         <List title="trending now" fetchUrl={requests.getTrending} isLarge={true} />
         <List title="comedies" fetchUrl={requests.getComedyMovies} isLarge={true} />
         <List title="action" fetchUrl={requests.getActionMovies} isLarge={true} />
-        <List title="top 10 in France today" fetchUrl={requests.getTopRated} isLarge={true} isRated={true} />
+        <List title="top 10 in France today" fetchUrl={requests.getTopRated} isLarge={false} isRated={true} />
         <List title="documentaries" fetchUrl={requests.getDocumentaries} isLarge={true} />
         <List title="for kids" fetchUrl={requests.getKidMovies} isLarge={true} />
         <List title="Science Fiction" fetchUrl={requests.getSciFiMovie} isLarge={true} />

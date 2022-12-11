@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { IMDBAPI } from '../../pages/api'
 import Card from '../card/card'
 
-export default function List({title, fetchUrl, isLarge}) {
+export default function List({title, fetchUrl, isLarge, isRated}) {
     const [movies, setMovies] = useState([])
     const [trailer, setTrailer] = useState('')
     const [isError, setError] = useState(false)
@@ -38,8 +38,8 @@ export default function List({title, fetchUrl, isLarge}) {
             <h4 className='text-2xl mb-2 text-white font-bold'>{capitalize(title)}</h4>
             <div className='mt-2 overflow-x-scroll overflow-y-hidden list'>
                 <div className='inline-flex  '>
-                {movies.map((movie) => (
-                    <Card key={movie.id} movie={movie} isLarge={isLarge} />
+                {movies.map((movie, i) => (
+                    <Card key={movie.id} movie={movie} isLarge={isLarge} index={i} isRated={isRated} />
                 ))}
                 </div>
             </div>

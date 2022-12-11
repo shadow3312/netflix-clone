@@ -13,7 +13,7 @@ const customLoader = ({ src, width, quality }) => {
   return `https://s3.amazonaws.com/demo/image/${src}?w=${width}&q=${quality || 75}`
 }
 
-export default function Card({movie, isLarge}) {
+export default function Card({movie, isLarge, isRated, index}) {
   const router = useRouter()
   const [fill, setFill] = useState(true)
   const [isHover, setHover] = useState(false)
@@ -37,17 +37,27 @@ export default function Card({movie, isLarge}) {
   return (
     console.log(movie),
     <>
-      <div className={`${styles.card} mb-12 mr-2 ${isLarge ? `w-56 h-36`: `w-56 h-80`} cursor-pointer relative transition-transform duration-500  hover:bg-[#111]`} onMouseOver={handleHover} onMouseLeave={() => setFill(true)} onClick={() => handleShowDetail()}>
-        <Image 
-            src={`${base_url}${isLarge ? movie.backdrop_path || movie.poster_path : movie.poster_path}`}
-            height={!fill && 50}
-            width={!fill && '200'}
-            fill={fill}
-            style={{objectFit: 'cover', borderRadius: 5}}
-            className={`${styles.cardPoster} `}
-            blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkMjOrBwABnwDvKNsECgAAAABJRU5ErkJggg=='
-            placeholder="blur"
-        />
+      <div className={`${styles.card} mb-12 mr-2 ${isLarge ? `w-56 h-36`: styles.long} cursor-pointer relative transition-transform duration-500 ${isRated && styles.rated}`} onMouseOver={handleHover} onMouseLeave={() => setFill(true)} onClick={() => handleShowDetail()}>
+          <div className='h-1/2 flex justify-between'>
+            {isRated && fill && index < 10 &&  (
+              <p className={styles.text__rated}>{index+1}</p>
+            )}
+            <Image 
+              src={`${base_url}${isLarge ? movie.backdrop_path || movie.poster_path : movie.poster_path}`}
+              height={!fill && 50}
+              width={!fill && '200'}
+              fill={fill}
+              style={{
+                objectFit: isRated && fill ? 'cover': 'cover', borderRadius: 5,
+                marginLeft: isRated && fill && 45
+              }}
+              className={`${styles.cardPoster} `}
+              blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkMjOrBwABnwDvKNsECgAAAABJRU5ErkJggg=='
+              placeholder="blur"
+            />
+          </div>
+          
+        
         <div className={styles.cardInfo}>
           <h3 className='text-white text-xs font-bold mb-2'>{movie.title || movie.name}</h3>
           <div className='flex'>
