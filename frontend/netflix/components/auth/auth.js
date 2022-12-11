@@ -1,6 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { BackendAPI } from '../../pages/api'
+import { userAtom } from '../../state/atoms'
+import {useRecoilState} from 'recoil'
 
 export default function Auth() {
+    // #region STATE
     const [error, setError] = useState(false)
     const [errorMessage, setErrorMessage] = useState('')
     const [name, setName] = useState('')
@@ -10,14 +14,23 @@ export default function Auth() {
     const [signIn, setSignIn] = useState(true)
     const [passwordMatch, setPasswordMatch] = useState(false)
     const [emailMatch, setEmailMatch] = useState(false)
+    const [user, setUser] = useRecoilState(userAtom)
+    const [loading, setLoading] = useState(false)
+    // #endregion
 
-    var validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    // #region other constants
+    const validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
+    const errorClass = 'border-0 border-b-red-500 focus:border-b-red-500 rounded-none'
+    // #endregion
 
     //#region change input
     const onChangeName = (e) => {
+        setError(false)
         setName(e.target.value)
     }
     const onChangeEmail = (e) => {
+        setError(false)
         setEmail(e.target.value)
         if (!signIn) {
             if (e.target.value.match(validRegex)) {
@@ -30,9 +43,11 @@ export default function Auth() {
 
     }
     const onChangePassword = (e) => {
+        setError(false)
         setPassword(e.target.value)
     }
     const onChangePasswordConfirm = (e) => {
+        setError(false)
         setPasswordConfirm(e.target.value)
         if (e.target.value === password) {
             setPasswordMatch(true)
@@ -41,35 +56,73 @@ export default function Auth() {
         }
     }
 
-    const errorClass = 'border-0 border-b-red-500 focus:border-b-red-500 rounded-none'
     //#endregion
-    
-    const handleLogin = () => {
 
+    const displayLoading = () => {
+        return (
+            loading && (
+                <div role="status">
+                    <svg className="inline mr-2 w-6 h-6 text-gray animate-spin fill-white" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
+                        <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
+                    </svg>
+                    <span className="sr-only">Loading...</span>
+                </div>
+            )
+        )  
     }
 
-    const handleSignup = () => {
-
+    const onError = (error) => {
+        setLoading(false)
+        setError(true)
+        if (error?.response && error.response.status === 404) {
+            setErrorMessage('Invalid credentials')
+        } else if (error?.response?.data?.email) {
+            setErrorMessage('This email is already taken. Please choose another one.')
+        } 
+        else {
+            setErrorMessage('An error has occured. Please try again later')
+        }
+    }
+    
+    const onSuccess = (response) => {
+        setLoading(false)
+        setError(false)
+        if (signIn) {
+            setUser(response.data)
+        } else {
+            handleLogin(response.data)
+        }
+    }
+    
+    const handleLogin = (payload) => {
+        setLoading(true)
+        setError(false)
+        BackendAPI.post('/auth/login/', payload)
+            .then(onSuccess)
+            .catch(onError)
     }
 
-    useEffect(() => {
-        // set error to true when errorMessage is set 
-        errorMessage.length > 0 ? setError(true) : setError(false)
-    }, [errorMessage])
-    
+    const handleSignup = (payload) => {
+        setLoading(true)
+        setError(false)
+        BackendAPI.post('/user/', payload)
+            .then(onSuccess)
+            .catch(onError)
+    }    
 
     const validateFields = (fields) => {
         let invalid_fields = []
         let valid = false
-        console.log(fields)
         Object.entries(fields).forEach(([key, value]) => {
-            valid = value.length <= 0
-            valid && invalid_fields.push(key)
+            value.length <= 0 && invalid_fields.push(key)
         })
+        valid = invalid_fields.length === 0
         return valid
     }
 
     const checkField = (field) => {
+        // TODO: Check requirements for a specific field
         let array = validateFields(field)
         return array
     }
@@ -83,41 +136,33 @@ export default function Auth() {
                 password: password
             }
             if (validateFields(fields)) {
-                if (passwordMatch && emailMatch) {
-                    handleLogin(fields)
-                } else {
-                    let message
-                    if (!passwordMatch) message = 'Password not matching'
-                    if (!emailMatch) message = 'Invalid email format'
-                    setErrorMessage(message)
-                }
+                handleLogin(fields)
             } else {
+                setError(true)
                 setErrorMessage('Please fill in all the fields')
             }
+            
         } else {
             fields = {
                 name: name, 
                 email: email, 
                 password: passwordConfirm
             }
+            if (validateFields(fields)) {
+                if (passwordMatch && emailMatch) {
+                    handleSignup(fields)
+                } else {
+                    let message
+                    if (!passwordMatch) message = 'Password not matching'
+                    if (!emailMatch) message = 'Invalid email format'
+                    setError(true)
+                    setErrorMessage(message)
+                }
+            } else {
+                setError(true)
+                setErrorMessage('Please fill in all the fields')
+            }
         }
-        console.log(validateFields(fields))
-        // if (signIn) {
-
-        // } else {
-        //     // Validate fields not empty
-        //     if (email.length > 0 && name.length > 0 && password.length > 0 && passwordConfirm.length > 0) {
-        //         // Validate requirements match
-        //         if (emailMatch && passwordMatch) {
-        //             const payload = {
-        //                 "name": name,
-        //                 "email": email,
-        //                 "password": passwordConfirm
-        //             }
-        //             handleSignup(payload)
-        //         }
-        //     }
-        // }        
     }
     return (
         <div className='bg-[url(https://preview.redd.it/zjgs096khv591.jpg?width=960&crop=smart&auto=webp&s=ad329047269ea783645bb9d7f58729401ecab873)] bg-cover bg-center h-screen w-screen flex items-center justify-center'>
@@ -162,11 +207,16 @@ export default function Auth() {
                         </div>
                         }
                     </div>
-                    <button type="button" class="text-white bg-netflix-red hover:bg-red-800  focus:outline-none  font-medium rounded-md text-sm w-full px-5 py-2.5 text-center" onClick={handleSubmit}>{signIn ? 'Sign in': 'Sign up'}</button>
+                    <button type="button" class="text-white bg-netflix-red hover:bg-red-800  focus:outline-none  font-medium rounded-md text-sm w-full px-5 py-2.5 text-center flex justify-center" onClick={handleSubmit}>{loading && displayLoading()} {signIn ? 'Sign in': 'Sign up'}</button>
                     <div className='mt-4'>
                         <p className='text-gray-200'>{signIn ? 'New here' : 'Already a member'}   ? 
                             <span className='cursor-pointer font-bold text-white' onClick={() => setSignIn(!signIn)}>{signIn ? ' Sign up': ' Sign in'}</span>
                         </p>
+                    </div>
+                    <div className='error text-red-600'>
+                        {error && (
+                            <p>{errorMessage}</p>
+                        )}
                     </div>
                 </form>
 
