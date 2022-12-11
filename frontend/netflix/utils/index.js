@@ -67,10 +67,13 @@ const processIcon = (iconName, style) => {
 }
 
 const processGenres = (ids) => {
+    let j = 0
     return (
       GENRES.map((genre, i) => {
         if (ids?.includes(genre.id)) {
-          return (
+            j++
+            
+         if (j<=3) return (
           <div key={i} className='mr-0.5 bg-netflix-red hover:bg-[#AF0000] text-blue-800 text-xs font-semibold px-2.5 py-0.1 pb-0.5 rounded-2xl' style={{backgroundColor: '#D81F26', marginRight: 2, paddingLeft: 10, paddingRight: 10 }}>
             <span className="text-white text-[10px] font-medium">{genre.name}</span>
           </div>

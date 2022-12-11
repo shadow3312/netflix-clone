@@ -75,6 +75,18 @@ const GENRES = [
         name: 'War'
     },
     {
+        id: 10764,
+        name: 'Reality'
+    },
+    {
+        id: 10766,
+        name: 'Soap'
+    },
+    {
+        id: 10767,
+        name: 'Talk'
+    },
+    {
         id: 37,
         name: 'Western'
     }

@@ -35,6 +35,7 @@ export default function Card({movie, isLarge}) {
   }
   
   return (
+    console.log(movie),
     <>
       <div className={`${styles.card} mb-12 mr-2 ${isLarge ? `w-56 h-36`: `w-56 h-80`} cursor-pointer relative transition-transform duration-500  hover:bg-[#111]`} onMouseOver={handleHover} onMouseLeave={() => setFill(true)} onClick={() => handleShowDetail()}>
         <Image 
