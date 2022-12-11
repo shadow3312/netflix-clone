@@ -45,12 +45,12 @@ export default function Banner({fetchUrl}) {
     return (
         <div className={`banner relative bg-cover h-[80vh] w-full p-0`} style={{border: 'solid 1px #000', backgroundImage: `url(${base_url}${topMovie && topMovie.backdrop_path})`, backgroundSize: 'cover'}}>
             <div className='flex flex-col absolute top-1/4 w-1/2 p-12 z-10'>
-                <h1 className='text-6xl text-white drop-shadow-lg font-bold mb-4'>{topMovie && (topMovie.title || topMovie.name)}</h1>
-                <p className='text-white text-xl font-semibold'>{topMovie && shortenString(topMovie.overview, 150)}</p>
-                <div className='flex'>
-                    <Button text="Play" bgColor='#fff' iconName='play'
+                <h1 className='text-5xl text-white drop-shadow-lg font-bold mb-4'>{topMovie && (topMovie.title || topMovie.name)}</h1>
+                <p className='text-white text-xl font-medium'>{topMovie && shortenString(topMovie.overview, 150)}</p>
+                <div className='flex mt-4'>
+                    <Button text="whatch now" bgColor='#D81F26' iconName='play'
                     iconStyle={iconStyle} />
-                    <Button text="More info" bgColor='rgba(109, 109, 109, 0.7)' iconName='info' iconStyle={iconStyle} />
+                    <Button text="More info" bgColor='transparent' iconName='info' iconStyle={iconStyle} />
                 </div>
             </div>
             <div className='gradient__bottom'></div>

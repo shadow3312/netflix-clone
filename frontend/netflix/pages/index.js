@@ -1,7 +1,7 @@
 import Head from 'next/head'
-import { useSelector, useDispatch } from 'react-redux'
 import Banner from '../components/banner/banner'
 import List from '../components/list/list'
+import MovieDetail from '../components/modal/movie-detail'
 import Navbar from '../components/navbar/navbar'
 import requests from '../utils/requests'
 
@@ -10,7 +10,7 @@ export default function Home() {
   // TODO: Add comment section to movies.
 
   return (
-    <div className='relative z-5'>
+    <div className='relative'>
       <Head>
         <title>Netflix clone</title>
         <meta name="description" content="A Full stack Netflix clone" />
@@ -18,7 +18,7 @@ export default function Home() {
       </Head>
       <Navbar />
       <Banner fetchUrl={requests.getTrending} />
-      <main className="main pl-12 relative z-5">
+      <main className="main pl-12 relative" style={{zIndex: 'auto'}}>
         <List title="trending now" fetchUrl={requests.getTrending} isLarge={true} />
         <List title="horror movies" fetchUrl={requests.getHorrorMovies} isLarge={true} />
         <List title="only on netflix" fetchUrl={requests.getNetflixOriginals} isLarge={false} />
@@ -30,6 +30,7 @@ export default function Home() {
         <List title="for kids" fetchUrl={requests.getKidMovies} isLarge={true} />
         <List title="Science Fiction" fetchUrl={requests.getSciFiMovie} isLarge={true} />
       </main>
+      <MovieDetail />
     </div>
   )
 }

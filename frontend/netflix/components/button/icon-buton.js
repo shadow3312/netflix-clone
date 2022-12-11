@@ -3,7 +3,7 @@ import { processIcon } from '../../utils'
 
 export default function IconButon({bgColor, iconName, iconStyle, additionnalStyle, onClick}) {
     return (
-        <button className={`text-blue-700 bg-[${bgColor}] hover:text-white font-medium rounded-full text-sm p-1.5 text-center inline-flex items-center ${bgColor !== '#fff' && `border-neutral-500 hover:border-neutral-200`} mr-1 border-2 ${additionnalStyle}`} onClick={onClick}>
+        <button className={`text-blue-700 bg-${bgColor} hover:text-white font-medium rounded-full text-sm p-1.5 text-center inline-flex items-center ${bgColor !== 'white' && `border-white-500 hover:border-red-500`} mr-1 border ${additionnalStyle}`} onClick={onClick}>
             {processIcon(iconName, iconStyle)}
         </button>
     )

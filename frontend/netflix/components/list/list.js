@@ -34,7 +34,7 @@ export default function List({title, fetchUrl, isLarge}) {
         fetchMovies(fetchUrl)
     }, [fetchUrl])
     return (
-        <div className='-mt-12 mb-8'>
+        <div className='-mt-6 mb-8'>
             <h4 className='text-2xl mb-2 text-white font-bold'>{capitalize(title)}</h4>
             <div className='mt-2 overflow-x-scroll overflow-y-hidden list'>
                 <div className='inline-flex  '>

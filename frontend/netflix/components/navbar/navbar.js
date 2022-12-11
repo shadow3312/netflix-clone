@@ -30,7 +30,7 @@ export default function Navbar() {
                 width={30}
                 height={30}
                 alt="netflix avatar"
-                className='fixed cursor-pointer right-12'
+                className='fixed cursor-pointer right-12 rounded-full'
             />
         </div>
     )
