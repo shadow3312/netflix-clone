@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import Banner from '../components/banner/banner'
+import Footer from '../components/footer/footer'
 import List from '../components/list/list'
 import MovieDetail from '../components/modal/movie-detail'
 import Navbar from '../components/navbar/navbar'
@@ -31,6 +32,7 @@ export default function Home() {
         <List title="Science Fiction" fetchUrl={requests.getSciFiMovie} isLarge={true} />
       </main>
       <MovieDetail />
+      <Footer />
     </div>
   )
 }
