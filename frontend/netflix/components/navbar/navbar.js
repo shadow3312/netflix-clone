@@ -19,14 +19,16 @@ export default function Navbar() {
     
     return (
         <div className={`nav fixed top-0 mb-32 w-full h-16 ${show && 'bg-netflix-black'} flex pl-12 p-4 justify-between items-center transition-all duration-500 ease-in`} style={{zIndex: 49}}>
-            <Image
-                src="/images/netflix.png"
-                width={100}
-                height={50}
-                alt="netflix logo"
-                className='cursor-pointer fit-contain'
-            />
-            <Link href="/me" className='cursor-pointer mr-8'>
+            <Link href={'/'}>
+                <Image
+                    src="/images/netflix.png"
+                    width={100}
+                    height={50}
+                    alt="netflix logo"
+                    className='cursor-pointer fit-contain'
+                />
+            </Link>
+            <Link href={'/me'} className='cursor-pointer mr-8'>
                 <Image
                     src="/images/avatar.png"
                     width={30}
@@ -35,8 +37,6 @@ export default function Navbar() {
                     className='rounded-full'
                 />
             </Link>
-            
-            
         </div>
     )
 }

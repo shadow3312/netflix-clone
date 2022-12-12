@@ -13,11 +13,6 @@ import Header from '../header/header'
 export default function Main() {
     const user = useRecoilValue(userAtom)
     const router = useRouter()
-    // useEffect(() => {
-    //     if (!user?.id) {
-    //         router.push('/auth')
-    //     }
-    // }, [user])
     
     return (
         user?.id ?

@@ -12,6 +12,7 @@ import IconButon from '../components/button/icon-buton';
 import { API_URL } from '../constants';
 import { IoIosBrush, IoIosCheckmark } from 'react-icons/io';
 import { IconContext } from 'react-icons';
+import Navbar from '../components/navbar/navbar';
 
 export default function Me() {
   //#region STATE
@@ -95,6 +96,7 @@ export default function Me() {
       <NoSsr>
         <>
           <Header title="My account" />
+          <Navbar />
           {user?.id ?
             <div className='flex w-screen h-screen items-center justify-center'>
                 <div className='container w-1/2 shadow-xl shadow-indigo-900/20 h-auto py-12 px-8 rounded-lg flex flex-col items-center'>
