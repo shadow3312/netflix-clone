@@ -51,15 +51,17 @@ class ProfileSerializer(serializers.ModelSerializer):
         data['name'] = validated_data.get('name')
         data['user'] = validated_data.get('user_id')
         data['type'] = validated_data.get('type')
+        data['profile_img'] = validated_data.get('profile_img')
 
         return self.Meta.model.objects.create(**data)
 
     def update(self, instance, validated_data):
         instance.name = validated_data.get('name')
+        instance.profile_img = validated_data.get('profile_img')
         instance.type = validated_data.get('type')
         instance.save()
         return instance
 
     class Meta:
-        fields = ['id', 'name', 'type', 'user_id', 'user']
+        fields = ['id', 'name', 'type', 'user_id', 'user', 'profile_img']
         model = models.Profile
