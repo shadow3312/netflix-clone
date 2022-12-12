@@ -1,17 +1,20 @@
 import React from 'react'
 import { userAtom } from '../state/atoms'
 import {useRecoilState} from 'recoil'
-import Main from '../components/main/main'
+import Auth from '../components/auth/auth'
+
+import NoSsr from '../components/no-ssr/no-ssr';
 
 export default function Me() {
     const [user, setUser] = useRecoilState(userAtom)
   return (
-    user?.id ? (
+    <NoSsr>
+      {user?.id ?
         <div className='flex w-screen'>
-            <p>{user.name}</p>
+            <p className='text-white'>{user?.name}</p>
         </div>
-    ) : (
-        <Main />
-    )
+        : <Auth />
+      }
+    </NoSsr>
   )
 }
