@@ -9,6 +9,7 @@ import Navbar from '../navbar/navbar'
 import {useRecoilValue} from 'recoil'
 import { useRouter } from 'next/router'
 import Auth from '../auth/auth'
+import Header from '../header/header'
 export default function Main() {
     const user = useRecoilValue(userAtom)
     const router = useRouter()
@@ -21,6 +22,7 @@ export default function Main() {
     return (
         user?.id ?
         <div>
+            <Header title="Discover" />
             <Navbar />
             <Banner fetchUrl={requests.getTrending} />
             <main className="main pl-12 relative" style={{zIndex: 'auto'}}>

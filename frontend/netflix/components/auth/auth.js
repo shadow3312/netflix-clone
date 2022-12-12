@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { BackendAPI } from '../../pages/api'
 import { userAtom } from '../../state/atoms'
 import {useRecoilState} from 'recoil'
+import Header from '../header/header'
 
 export default function Auth() {
     // #region STATE
@@ -165,64 +166,67 @@ export default function Auth() {
         }
     }
     return (
-        <div className='bg-[url(https://preview.redd.it/zjgs096khv591.jpg?width=960&crop=smart&auto=webp&s=ad329047269ea783645bb9d7f58729401ecab873)] bg-cover bg-center h-screen w-screen flex items-center justify-center'>
-            <div className='container bg-black bg-opacity-80 w-1/3 h-auto px-12 py-6 rounded-lg'>
-                <form>
-                    <h3 className='text-white text-4xl mb-6 font-bold'>{signIn ? 'Sign In' : 'Sign Up'}</h3>
-                    <div className="relative z-0 mb-6 w-full group">
-                        <input type="email" name="email" onChange={onChangeEmail} id="email" className={`${!signIn && !emailMatch && errorClass} block py-2.5 w-full text-sm text-white bg-transparent border-b rounded-md  focus:outline-none focus:ring-0
-                        focus:border-b
-                        focus:border-0
-                        focus:rounded-none focus:border-gray-600`} placeholder=" " required />
-                        <label htmlFor="email" className="peer-focus:font-medium absolute px-2 text-sm text-gray-200  duration-300 transform -translate-y-6 scale-75 top-2 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-white
-                        peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:px-0 peer-focus:scale-75 peer-focus:-translate-y-6">Email</label>
-                    </div>
-                    {!signIn && 
-                    <div className="relative z-0 mb-6 w-full group">
-                        <input type="text" name="name" id="name" onChange={onChangeName} className="block py-2.5 w-full text-sm text-white bg-transparent border-b rounded-md  focus:outline-none focus:ring-0
-                        focus:border-b
-                        focus:border-0
-                        focus:rounded-none focus:border-gray-600 peer" placeholder=" " required />
-                        <label htmlFor="name" className="peer-focus:font-medium absolute px-2 text-sm text-gray-200  duration-300 transform -translate-y-6 scale-75 top-2 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-white
-                        peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:px-0 peer-focus:scale-75 peer-focus:-translate-y-6">Display name</label>
-                    </div>
-                    }
-                    <div className={`grid ${!signIn && `md:grid-cols-2 md:gap-6`} `}>
+        <>
+            <Header title="Welcome" />
+            <div className='bg-[url(https://preview.redd.it/zjgs096khv591.jpg?width=960&crop=smart&auto=webp&s=ad329047269ea783645bb9d7f58729401ecab873)] bg-cover bg-center h-screen w-screen flex items-center justify-center'>
+                <div className='container bg-black bg-opacity-80 w-1/3 h-auto px-12 py-6 rounded-lg'>
+                    <form>
+                        <h3 className='text-white text-4xl mb-6 font-bold'>{signIn ? 'Sign In' : 'Sign Up'}</h3>
                         <div className="relative z-0 mb-6 w-full group">
-                            <input type="password" onChange={onChangePassword} name="password" id="password" className={`${!signIn && !passwordMatch && errorClass} block py-2.5 w-full text-sm text-white bg-transparent border-b rounded-md  focus:outline-none focus:ring-0
+                            <input type="email" name="email" onChange={onChangeEmail} id="email" className={`${!signIn && !emailMatch && errorClass} block py-2.5 w-full text-sm text-white bg-transparent border-b rounded-md  focus:outline-none focus:ring-0
                             focus:border-b
                             focus:border-0
                             focus:rounded-none focus:border-gray-600`} placeholder=" " required />
-                            <label htmlFor="password" className="peer-focus:font-medium px-2 absolute text-sm text-gray-200  duration-300 transform -translate-y-6 scale-75 top-2 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-white
-                            peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:px-0 peer-focus:scale-75 peer-focus:-translate-y-6">Password</label>
+                            <label htmlFor="email" className="peer-focus:font-medium absolute px-2 text-sm text-gray-200  duration-300 transform -translate-y-6 scale-75 top-2 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-white
+                            peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:px-0 peer-focus:scale-75 peer-focus:-translate-y-6">Email</label>
                         </div>
-                        {!signIn &&
+                        {!signIn && 
                         <div className="relative z-0 mb-6 w-full group">
-                            <input type="password" onChange={onChangePasswordConfirm} name="repeat_password" id="repeat_password" className={`${!signIn && !passwordMatch && errorClass} block py-2.5 w-full text-sm text-white bg-transparent border-b  rounded-md  focus:outline-none focus:ring-0
+                            <input type="text" name="name" id="name" onChange={onChangeName} className="block py-2.5 w-full text-sm text-white bg-transparent border-b rounded-md  focus:outline-none focus:ring-0
                             focus:border-b
                             focus:border-0
-                            focus:rounded-none focus:border-gray-600`} placeholder=" " required />
-                            <label htmlFor="repeat_password" className="peer-focus:font-medium absolute px-2 text-sm text-gray-200  duration-300 transform -translate-y-6 scale-75 top-2 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-white
-                            peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:px-0 peer-focus:scale-75 peer-focus:-translate-y-6">Confirm password</label>
+                            focus:rounded-none focus:border-gray-600 peer" placeholder=" " required />
+                            <label htmlFor="name" className="peer-focus:font-medium absolute px-2 text-sm text-gray-200  duration-300 transform -translate-y-6 scale-75 top-2 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-white
+                            peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:px-0 peer-focus:scale-75 peer-focus:-translate-y-6">Display name</label>
                         </div>
                         }
-                    </div>
-                    <button type="button" className="text-white bg-netflix-red hover:bg-red-800  focus:outline-none  font-medium rounded-md text-sm w-full px-5 py-2.5 text-center flex justify-center" onClick={handleSubmit}>{loading && displayLoading()} {signIn ? 'Sign in': 'Sign up'}</button>
-                    <div className='mt-4'>
-                        <p className='text-gray-200'>{signIn ? 'New here' : 'Already a member'}   ? 
-                            <span className='cursor-pointer font-bold text-white' onClick={() => setSignIn(!signIn)}>{signIn ? ' Sign up': ' Sign in'}</span>
-                        </p>
-                    </div>
-                    <div className='error text-red-600'>
-                        {error && (
-                            <p>{errorMessage}</p>
-                        )}
-                    </div>
-                </form>
+                        <div className={`grid ${!signIn && `md:grid-cols-2 md:gap-6`} `}>
+                            <div className="relative z-0 mb-6 w-full group">
+                                <input type="password" onChange={onChangePassword} name="password" id="password" className={`${!signIn && !passwordMatch && errorClass} block py-2.5 w-full text-sm text-white bg-transparent border-b rounded-md  focus:outline-none focus:ring-0
+                                focus:border-b
+                                focus:border-0
+                                focus:rounded-none focus:border-gray-600`} placeholder=" " required />
+                                <label htmlFor="password" className="peer-focus:font-medium px-2 absolute text-sm text-gray-200  duration-300 transform -translate-y-6 scale-75 top-2 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-white
+                                peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:px-0 peer-focus:scale-75 peer-focus:-translate-y-6">Password</label>
+                            </div>
+                            {!signIn &&
+                            <div className="relative z-0 mb-6 w-full group">
+                                <input type="password" onChange={onChangePasswordConfirm} name="repeat_password" id="repeat_password" className={`${!signIn && !passwordMatch && errorClass} block py-2.5 w-full text-sm text-white bg-transparent border-b  rounded-md  focus:outline-none focus:ring-0
+                                focus:border-b
+                                focus:border-0
+                                focus:rounded-none focus:border-gray-600`} placeholder=" " required />
+                                <label htmlFor="repeat_password" className="peer-focus:font-medium absolute px-2 text-sm text-gray-200  duration-300 transform -translate-y-6 scale-75 top-2 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-white
+                                peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:px-0 peer-focus:scale-75 peer-focus:-translate-y-6">Confirm password</label>
+                            </div>
+                            }
+                        </div>
+                        <button type="button" className="text-white bg-netflix-red hover:bg-red-800  focus:outline-none  font-medium rounded-md text-sm w-full px-5 py-2.5 text-center flex justify-center" onClick={handleSubmit}>{loading && displayLoading()} {signIn ? 'Sign in': 'Sign up'}</button>
+                        <div className='mt-4'>
+                            <p className='text-gray-200'>{signIn ? 'New here' : 'Already a member'}   ? 
+                                <span className='cursor-pointer font-bold text-white' onClick={() => setSignIn(!signIn)}>{signIn ? ' Sign up': ' Sign in'}</span>
+                            </p>
+                        </div>
+                        <div className='error text-red-600'>
+                            {error && (
+                                <p>{errorMessage}</p>
+                            )}
+                        </div>
+                    </form>
+
+                </div>
 
             </div>
-
-        </div>
+        </>
         
     )
 }

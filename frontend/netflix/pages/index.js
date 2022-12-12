@@ -13,6 +13,7 @@ import { useEffect } from 'react'
 import { Router } from 'next/router'
 import Me from './me'
 import dynamic from "next/dynamic";
+import Header from '../components/header/header'
 
 const Main = dynamic(() => import("../components/main/main"), { ssr: false });
 export default function Home() {
@@ -25,12 +26,7 @@ export default function Home() {
   // }
   
   return (
-    <div className='relative' suppressHydrationWarning>
-      <Head>
-        <title>Netflix clone</title>
-        <meta name="description" content="A Full stack Netflix clone" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+    <div className='relative'>
       <Main />
     </div>
   )
