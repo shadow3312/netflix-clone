@@ -19,11 +19,6 @@ const Main = dynamic(() => import("../components/main/main"), { ssr: false });
 export default function Home() {
   const user = useRecoilValue(userAtom)
   // TODO: Add comment section to movies.
-
-  
-  // if (!user?.id) {
-  //   return <Auth />
-  // }
   
   return (
     <div className='relative'>
