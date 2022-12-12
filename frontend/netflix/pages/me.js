@@ -9,6 +9,7 @@ import { BackendAPI } from './api';
 import Image from 'next/image';
 import Button from '../components/button/button';
 import IconButon from '../components/button/icon-buton';
+import { API_URL } from '../constants';
 
 export default function Me() {
   // //#region STATE
@@ -59,7 +60,7 @@ export default function Me() {
                     {profiles.map((profile) => (
                       <div className='flex flex-col items-center cursor-pointer mr-4' onClick={() => setProfile(profile)}>
                         <div className="relative">
-                          <img className="w-24  h-24 ring-2 p-1 ring-gray-100 rounded-full" src={profile.profile_img} alt={`${user?.name} ${profile.id}`} fill />
+                          <img className="w-24  h-24 ring-2 p-1 ring-gray-100 rounded-full" src={`${API_URL}${profile.profile_img}`} alt={`${user?.name} ${profile.id}`} fill />
                           {currentProfile.id === profile.id && renderCurrent()}
                         </div>
                         <div className='mt-4'>
