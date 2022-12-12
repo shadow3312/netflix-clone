@@ -116,6 +116,22 @@ export default function Me() {
       .catch(onError)
     }
 
+    const handleDelete = (profile__id) => {
+      const onSuccess = (response) => {
+        setError(false)
+        setEdit(false)
+        setCreate(false)
+        fetchProfiles()
+      }
+      const onError = (error) => {
+        setError(true)
+        setErrorMessage('An error has occured. Please try again later.')
+      }
+      BackendAPI.delete(`/profile/${profile__id}/delete/`)
+        .then(onSuccess)
+        .catch(onError)
+    }
+
     const renderCurrent = () => {
       return <span className="top-0 right-0 absolute  w-5 h-5 bg-netflix-red border-2 border-white dark:border-gray-800 rounded-full"></span>
     }
@@ -139,7 +155,10 @@ export default function Me() {
             multiple={false}
             onChange={(e) => {onChangeFile(e)}}
           />
-          <Button bgColor={'green-300'} additionnalStyle={'w-1/3 self-center text-center'} text='Save' onClick={handleSubmit} />
+          <div className='flex'>
+            <Button bgColor={'green-300'} additionnalStyle={'w-1/3 self-center text-center'} text='Save' onClick={handleSubmit} />
+            {edit && <Button bgColor={'green-300'} additionnalStyle={'w-1/3 self-center text-center'} text='Delete' onClick={() => {handleDelete(profile.id)}} />}
+          </div>
         </div>
       )
     } 
