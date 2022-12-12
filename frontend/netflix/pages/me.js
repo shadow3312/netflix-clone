@@ -92,6 +92,12 @@ export default function Me() {
       return <span className="top-0 right-0 absolute  w-5 h-5 bg-netflix-red border-2 border-white dark:border-gray-800 rounded-full"></span>
     }
 
+    const renderBadge = (type) => {
+      
+      // let text = type === '1' ? 'Adult' : 'Kid'
+      return <span className='text-white text-lg absolute'>{type.type}</span>
+    }
+
     return (
       <NoSsr>
         <>
@@ -107,6 +113,7 @@ export default function Me() {
                         <div className="relative">
                           <img className="w-24  h-24 ring-2 p-1 ring-gray-100 rounded-full z-10 object-cover" src={`${API_URL}${profile.profile_img}`} alt={`${user?.name} ${profile.id}`} fill />
                           {currentProfile.id === profile.id && renderCurrent()}
+                          {renderBadge(profile)}
                         </div>
                         <div className='mt-4'>
                           <p className='text-lg text-white'>{profile?.name}</p>
