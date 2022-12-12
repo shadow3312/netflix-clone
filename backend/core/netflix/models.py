@@ -35,7 +35,8 @@ class Profile(models.Model):
         upload_to='profile/',
         default='profile/user.png'
     )
-    type = models.CharField(max_length=191, choices=TYPES, default="1")
+    type = models.CharField(max_length=191, choices=TYPES,
+                            default="ADULT", blank=True, null=True)
     user = models.ForeignKey(MyUser, on_delete=models.CASCADE)
 
     objects = managers.TemporalQuerySet()

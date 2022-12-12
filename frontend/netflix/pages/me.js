@@ -102,7 +102,7 @@ export default function Me() {
       formData.append("name", newName || currentProfile.name)
       console.log('fil sent ',selectedFile?.name)
       selectedFile?.name !== undefined && formData.append("profile_img", selectedFile)
-      type.length > 0 && formData.append("type", type)
+      type.length > 0 ? formData.append("type", type) : formData.append("type", "ADULT")
       create && formData.append("user_id", user.id)
 
       let edit_url = `/profile/${currentProfile.id}/edit/`
