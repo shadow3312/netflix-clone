@@ -207,8 +207,8 @@ export default function Me() {
                     <p className='text-netflix-red text-lg'>{errorMessage}</p>
                   }
                   {create && renderForm()}
-                  <div className='buttons mt-6 flex flex-col items-center justify-center'>
-                    <IconButon additionnalStyle={'border border-white'} iconName={'plus'} iconStyle={iconStyle} onClick={() => {setCreate(true)}} />
+                   <div className='buttons mt-6 flex flex-col items-center justify-center'>
+                   {profiles.length < 4 && <IconButon additionnalStyle={'border border-white'} iconName={'plus'} iconStyle={iconStyle} onClick={() => {setCreate(true)}} /> }
                     <Button text={'Logout'} additionnalStyle={'border border-white mx-auto'} iconName={'logout'} iconStyle={iconStyle} onClick={handleLogout} />
                   </div>
                 </div>
