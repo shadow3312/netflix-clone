@@ -26,13 +26,13 @@ export default function Navbar() {
                 alt="netflix logo"
                 className='cursor-pointer fit-contain'
             />
-            <Link href="/me">
+            <Link href="/me" className='cursor-pointer mr-12'>
                 <Image
                     src="/images/avatar.png"
                     width={30}
                     height={30}
                     alt="netflix avatar"
-                    className='cursor-pointer right-12 rounded-full'
+                    className='rounded-full'
                 />
             </Link>
             
