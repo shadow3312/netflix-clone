@@ -48,7 +48,7 @@ export default function Banner({fetchUrl}) {
  
     useEffect(() => {
         fetchTrending()
-    }, [fetchUrl])
+    }, [])
 
     return (
         <div className={`banner relative bg-cover h-[80vh] w-full p-0`} style={{border: 'solid 1px #000', backgroundImage: `url(${BASE_IMG_URL}${topMovie && topMovie.backdrop_path})`, backgroundSize: 'cover'}}>

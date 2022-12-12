@@ -43,7 +43,7 @@ export default function Card({movie, isLarge, isRated, index}) {
             )}
             <Image 
               src={`${base_url}${isLarge ? movie.backdrop_path || movie.poster_path : movie.poster_path}`}
-              height={!fill && 50}
+              height={!fill && '50'}
               width={!fill && '200'}
               fill={fill}
               style={{
@@ -53,6 +53,7 @@ export default function Card({movie, isLarge, isRated, index}) {
               className={`${styles.cardPoster} `}
               blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkMjOrBwABnwDvKNsECgAAAABJRU5ErkJggg=='
               placeholder="blur"
+              alt={movie.title || movie.name}
             />
           </div>
           

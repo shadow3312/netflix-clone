@@ -5,7 +5,7 @@ const { persistAtom } = recoilPersist()
 
 const userAtom = atom({
     key: 'current_user',
-    default: {},
+    default: undefined,
     effects: [
         persistAtom
     ]

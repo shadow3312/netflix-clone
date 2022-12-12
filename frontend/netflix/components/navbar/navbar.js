@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
+import Link from 'next/link'
 
 export default function Navbar() {
     const [show, setShow] = useState(false)
@@ -23,15 +24,16 @@ export default function Navbar() {
                 width={100}
                 height={50}
                 alt="netflix logo"
-                className='fixed cursor-pointer fit-contain'
+                className='cursor-pointer fit-contain'
             />
             <Image
                 src="/images/avatar.png"
                 width={30}
                 height={30}
                 alt="netflix avatar"
-                className='fixed cursor-pointer right-12 rounded-full'
+                className='cursor-pointer right-12 rounded-full'
             />
+            
         </div>
     )
 }

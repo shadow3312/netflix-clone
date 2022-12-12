@@ -1,13 +1,25 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { userAtom } from '../../state/atoms'
 import requests from '../../utils/requests'
 import Banner from '../banner/banner'
 import Footer from '../footer/footer'
 import List from '../list/list'
 import MovieDetail from '../modal/movie-detail'
 import Navbar from '../navbar/navbar'
-
+import {useRecoilValue} from 'recoil'
+import { useRouter } from 'next/router'
+import Auth from '../auth/auth'
 export default function Main() {
+    const user = useRecoilValue(userAtom)
+    const router = useRouter()
+    // useEffect(() => {
+    //     if (!user?.id) {
+    //         router.push('/auth')
+    //     }
+    // }, [user])
+    
     return (
+        user?.id ?
         <div>
             <Navbar />
             <Banner fetchUrl={requests.getTrending} />
@@ -25,6 +37,6 @@ export default function Main() {
             </main>
             <MovieDetail />
             <Footer />
-        </div>
+        </div> : <Auth />
     )
 }

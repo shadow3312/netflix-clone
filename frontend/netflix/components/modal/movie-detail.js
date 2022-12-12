@@ -24,7 +24,6 @@ export default function MovieDetail() {
     }
 
     return (
-        console.log(selectedMovie),
         <Modal
             show={showDetail}
             onClose={onClose}
@@ -40,7 +39,7 @@ export default function MovieDetail() {
                 </IconContext.Provider>
                 </div>
                 <div className='movie_detail bg-cover h-full w-full' style={{backgroundImage: `url(${base_url}${selectedMovie.backdrop_path})`}}></div>
-                <div class="bg-text flex pt-12">
+                <div className="bg-text flex pt-12">
                     <div className="movie_img h-96 w-1/5 rounded-tl-3xl rounded-br-3xl rounded-tr-md rounded-bl-md border-netflix-black shadow-lg shadow-netflix-black ml-12 bg-cover bg-center bg-no-repeat" style={{backgroundImage: `url(${base_url}${selectedMovie.poster_path})`}}>
                     </div>
                     <div className='movie_desc pl-12 mt-8 w-4/5'>

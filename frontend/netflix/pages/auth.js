@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { BackendAPI } from '../../pages/api'
-import { userAtom } from '../../state/atoms'
+import { BackendAPI } from './api'
+import { userAtom } from '../state/atoms'
 import {useRecoilState} from 'recoil'
+import { useRouter } from 'next/router'
 
 export default function Auth() {
     // #region STATE
@@ -16,6 +17,7 @@ export default function Auth() {
     const [emailMatch, setEmailMatch] = useState(false)
     const [user, setUser] = useRecoilState(userAtom)
     const [loading, setLoading] = useState(false)
+    const router = useRouter()
     // #endregion
 
     // #region other constants
@@ -90,6 +92,7 @@ export default function Auth() {
         setError(false)
         if (signIn) {
             setUser(response.data)
+            router.push('/')
         } else {
             handleLogin(response.data)
         }
@@ -164,8 +167,16 @@ export default function Auth() {
             }
         }
     }
+
+    useEffect(() => {
+        if (user?.id) {
+            router.push('/')
+        }
+    }, [])
+
     return (
-        <div className='bg-[url(https://preview.redd.it/zjgs096khv591.jpg?width=960&crop=smart&auto=webp&s=ad329047269ea783645bb9d7f58729401ecab873)] bg-cover bg-center h-screen w-screen flex items-center justify-center'>
+        
+        <div suppressHydrationWarning className='bg-[url(https://preview.redd.it/zjgs096khv591.jpg?width=960&crop=smart&auto=webp&s=ad329047269ea783645bb9d7f58729401ecab873)] bg-cover bg-center h-screen w-screen flex items-center justify-center'>
             <div className='container bg-black bg-opacity-80 w-1/3 h-auto px-12 py-6 rounded-lg'>
                 <form>
                     <h3 className='text-white text-4xl mb-6 font-bold'>{signIn ? 'Sign In' : 'Sign Up'}</h3>
