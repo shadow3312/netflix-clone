@@ -33,7 +33,7 @@ class Profile(models.Model):
         blank=True,
         null=True,
         upload_to='profile/',
-        default='profile/user.jpg'
+        default='profile/user.png'
     )
     type = models.CharField(max_length=191, choices=TYPES, default="1")
     user = models.ForeignKey(MyUser, on_delete=models.CASCADE)

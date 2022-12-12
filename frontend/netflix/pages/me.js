@@ -59,7 +59,7 @@ export default function Me() {
                     {profiles.map((profile) => (
                       <div className='flex flex-col items-center cursor-pointer mr-4' onClick={() => setProfile(profile)}>
                         <div className="relative">
-                          <img className="w-24  h-24 ring-2 p-1 ring-gray-100 rounded-full" src="/images/avatar.png" alt={`${user?.name} ${profile.id}`} fill />
+                          <img className="w-24  h-24 ring-2 p-1 ring-gray-100 rounded-full" src={profile.profile_img} alt={`${user?.name} ${profile.id}`} fill />
                           {currentProfile.id === profile.id && renderCurrent()}
                         </div>
                         <div className='mt-4'>
