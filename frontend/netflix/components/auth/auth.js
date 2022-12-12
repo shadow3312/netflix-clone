@@ -46,6 +46,11 @@ export default function Auth() {
     const onChangePassword = (e) => {
         setError(false)
         setPassword(e.target.value)
+        if (e.target.value === passwordConfirm) {
+            setPasswordMatch(true)
+        } else {
+            setPasswordMatch(false)
+        }
     }
     const onChangePasswordConfirm = (e) => {
         setError(false)
@@ -92,7 +97,7 @@ export default function Auth() {
         if (signIn) {
             setUser(response.data)
         } else {
-            handleLogin(response.data)
+            setSignIn(true)
         }
     }
     
@@ -150,11 +155,11 @@ export default function Auth() {
                 password: passwordConfirm
             }
             if (validateFields(fields)) {
-                if (passwordMatch && emailMatch) {
+                if (password === passwordConfirm && emailMatch) {
                     handleSignup(fields)
                 } else {
                     let message
-                    if (!passwordMatch) message = 'Password not matching'
+                    if (!password !== passwordConfirm) message = 'Password not matching'
                     if (!emailMatch) message = 'Invalid email format'
                     setError(true)
                     setErrorMessage(message)

@@ -8,6 +8,7 @@ import Header from '../components/header/header';
 import { BackendAPI } from './api';
 import Image from 'next/image';
 import Button from '../components/button/button';
+import IconButon from '../components/button/icon-buton';
 
 export default function Me() {
     const [user, setUser] = useRecoilState(userAtom)
@@ -30,6 +31,16 @@ export default function Me() {
     useEffect(() => {
       fetchProfiles()
     }, [user])
+
+    const iconStyle = {
+      color: "#fff",
+      size: '1em',
+    }
+
+    const handleLogout = () => {
+      setUser(undefined)
+    }
+
     return (
       <NoSsr>
         <>
@@ -49,8 +60,9 @@ export default function Me() {
                       </div>
                     </div>
                   ))}
-                  <div className='button mt-6'>
-                    <Button text='Manage profiles' additionnalStyle={'border border-white'} />
+                  <div className='buttons mt-6'>
+                    <Button text={'Manage profiles'} additionnalStyle={'border border-white'} iconName="edit" iconStyle={iconStyle} />
+                    <Button text={'Logout'} additionnalStyle={'border border-white mx-auto'} iconName={'logout'} iconStyle={iconStyle} onClick={handleLogout} />
                   </div>
                 </div>
             </div>

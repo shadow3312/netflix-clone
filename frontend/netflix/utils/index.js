@@ -1,4 +1,4 @@
-import { IoIosAdd, IoIosArrowDown, IoIosHeart, IoIosInformationCircleOutline, IoMdPlay, IoMdThumbsDown, IoMdThumbsUp } from 'react-icons/io';
+import { IoIosAdd, IoIosArrowDown, IoIosBrush, IoIosHeart, IoIosInformationCircleOutline, IoIosLogOut, IoMdPlay, IoMdThumbsDown, IoMdThumbsUp } from 'react-icons/io';
 import { IconContext } from "react-icons";
 import { GENRES } from '../constants';
 import { Rating } from 'flowbite-react';
@@ -56,11 +56,22 @@ const processIcon = (iconName, style) => {
                     <IoIosArrowDown />
                 </IconContext.Provider>
             )
-        
         case 'favorite':
             return (
                 <IconContext.Provider value={style}>
                     <IoIosHeart />
+                </IconContext.Provider>
+            )
+        case 'logout':
+            return (
+                <IconContext.Provider value={style}>
+                    <IoIosLogOut />
+                </IconContext.Provider>
+            )
+        case 'edit':
+            return (
+                <IconContext.Provider value={style}>
+                    <IoIosBrush />
                 </IconContext.Provider>
             )
     }
