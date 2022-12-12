@@ -22,8 +22,10 @@ export default function Me() {
     const [errorMessage, setErrorMessage] = useState('')
     const [currentProfile, setProfile] = useRecoilState(profileAtom)
     const [edit, setEdit] = useState(false)
+    const [create, setCreate] = useState(false)
     const [selectedFile, setSelectedFile] = React.useState(null)
     const [newName, setNewName] = useState('')
+    const [type, setType] = useState('')
   //#endregion
 
     const fetchProfiles = () => {
@@ -42,14 +44,11 @@ export default function Me() {
       fetchProfiles()
     }, [user])
 
+    //#region On Change
+
     const onChangeName = (e) => {
       setError(false)
       setNewName(e.target.value)
-    }
-
-    const iconStyle = {
-      color: "#fff",
-      size: '1em',
     }
 
     const onChangeFile = (e) => {
@@ -57,6 +56,19 @@ export default function Me() {
       console.log(file)
       setSelectedFile(file)
     }
+
+    const onChangeType = (e) => {
+      setType(e.target.value)
+    }
+
+    //#endregion
+
+    const iconStyle = {
+      color: "#fff",
+      size: '1em',
+    }
+
+    
 
     const handleLogout = () => {
       setUser(undefined)
@@ -67,9 +79,14 @@ export default function Me() {
       setError(false)
       const onSuccess = (response) => {
         let index = response.data.id
-        setProfiles(profiles => profiles.map((profile, i) => profile.id == index ? response.data : profile))
+        edit && setProfiles(profiles => profiles.map((profile, i) => profile.id == index ? response.data : profile))
         setEdit(false)
         setSelectedFile('')
+        setNewName('')
+        setType('')
+
+        create && fetchProfiles()
+        setCreate(false)
       }
       const onError = (error) => {
         setError(true)
@@ -80,22 +97,55 @@ export default function Me() {
           "Content-Type": "multipart/form-data"
         }
       };
+
+      // Append form data
       formData.append("name", newName || currentProfile.name)
       console.log('fil sent ',selectedFile?.name)
       selectedFile?.name !== undefined && formData.append("profile_img", selectedFile)
-      BackendAPI.put(`/profile/${currentProfile.id}/edit/`, formData, config)
+      type.length > 0 && formData.append("type", type)
+      create && formData.append("user_id", user.id)
+
+      let edit_url = `/profile/${currentProfile.id}/edit/`
+      let create_url = `/profile/`
+      let url = edit ? edit_url: create_url
+      edit && BackendAPI.put(url, formData, config)
         .then(onSuccess)
         .catch(onError)
+      create && BackendAPI.post(url, formData, config)
+      .then(onSuccess)
+      .catch(onError)
     }
 
     const renderCurrent = () => {
       return <span className="top-0 right-0 absolute  w-5 h-5 bg-netflix-red border-2 border-white dark:border-gray-800 rounded-full"></span>
     }
 
+    const renderForm = (profile) => {
+      return (
+        <div className='edit flex flex-col'>
+          <input
+            type='text'
+            defaultValue={profile?.name}
+            className='rounded-lg bg-gray-700 text-white  focus:ring-0'
+            onChange={(e) =>{onChangeName(e)}} 
+          />
+          <select onChange={(e) => {onChangeType(e)}}>
+            <option selected={profile?.type==="ADULT"} value="ADULT">Adult</option>
+            <option selected={profile?.type==="KID"} value="KID">Kid</option>
+          </select>
+          <input
+            type='file'
+            className='text-white'
+            multiple={false}
+            onChange={(e) => {onChangeFile(e)}}
+          />
+          <Button bgColor={'green-300'} additionnalStyle={'w-1/3 self-center text-center'} text='Save' onClick={handleSubmit} />
+        </div>
+      )
+    } 
+
     const renderBadge = (type) => {
-      
-      // let text = type === '1' ? 'Adult' : 'Kid'
-      return <span className='text-white text-lg absolute'>{type.type}</span>
+      return <span className='text-white text-sm absolute ml-12 -mt-8 rounded bg-netflix-red px-2'>{type}</span>
     }
 
     return (
@@ -113,7 +163,7 @@ export default function Me() {
                         <div className="relative">
                           <img className="w-24  h-24 ring-2 p-1 ring-gray-100 rounded-full z-10 object-cover" src={`${API_URL}${profile.profile_img}`} alt={`${user?.name} ${profile.id}`} fill />
                           {currentProfile.id === profile.id && renderCurrent()}
-                          {renderBadge(profile)}
+                          {renderBadge(profile.type)}
                         </div>
                         <div className='mt-4'>
                           <p className='text-lg text-white'>{profile?.name}</p>
@@ -129,22 +179,7 @@ export default function Me() {
                             </div>
                         </div>
                         {edit && currentProfile.id === profile.id && 
-                          <div className='edit flex flex-col'>
-                            <input
-                              type='text'
-                              defaultValue={profile.name}
-                              className='rounded-lg bg-gray-700 text-white  focus:ring-0'
-                              onChange={(e) =>{onChangeName(e)}} 
-                            />
-                            <input
-                              type='file'
-                              className='text-white'
-                              multiple={false}
-                              onChange={(e) => {onChangeFile(e)}}
-                            />
-                            <Button bgColor={'green-300'} additionnalStyle={'w-1/3 self-center text-center'} text='Save' onClick={handleSubmit} />
-                          </div>
-                          
+                          renderForm(profile)
                         }
                       </div>
                     ))}
@@ -152,7 +187,9 @@ export default function Me() {
                   {error &&
                     <p className='text-netflix-red text-lg'>{errorMessage}</p>
                   }
-                  <div className='buttons mt-6'>
+                  {create && renderForm()}
+                  <div className='buttons mt-6 flex flex-col items-center justify-center'>
+                    <IconButon additionnalStyle={'border border-white'} iconName={'plus'} iconStyle={iconStyle} onClick={() => {setCreate(true)}} />
                     <Button text={'Logout'} additionnalStyle={'border border-white mx-auto'} iconName={'logout'} iconStyle={iconStyle} onClick={handleLogout} />
                   </div>
                 </div>
