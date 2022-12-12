@@ -57,7 +57,9 @@ class ProfileSerializer(serializers.ModelSerializer):
 
     def update(self, instance, validated_data):
         instance.name = validated_data.get('name')
-        instance.profile_img = validated_data.get('profile_img')
+        profile_img = validated_data.get('profile_img')
+        if profile_img != None:
+            instance.profile_img = profile_img
         instance.type = validated_data.get('type')
         instance.save()
         return instance

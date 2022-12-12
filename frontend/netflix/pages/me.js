@@ -10,15 +10,21 @@ import Image from 'next/image';
 import Button from '../components/button/button';
 import IconButon from '../components/button/icon-buton';
 import { API_URL } from '../constants';
+import { IoIosBrush, IoIosCheckmark } from 'react-icons/io';
+import { IconContext } from 'react-icons';
 
 export default function Me() {
-  // //#region STATE
+  //#region STATE
     const [user, setUser] = useRecoilState(userAtom)
     const [profiles, setProfiles] = useState([])
     const [error, setError] = useState(false)
     const [errorMessage, setErrorMessage] = useState('')
     const [currentProfile, setProfile] = useRecoilState(profileAtom)
-  // //#endregion
+    const [edit, setEdit] = useState(false)
+    const [selectedFile, setSelectedFile] = React.useState(null)
+    const [newName, setNewName] = useState('')
+  //#endregion
+
     const fetchProfiles = () => {
       const onSuccess = (response) => {
         setProfiles(response.data.results)
@@ -35,13 +41,50 @@ export default function Me() {
       fetchProfiles()
     }, [user])
 
+    const onChangeName = (e) => {
+      setError(false)
+      setNewName(e.target.value)
+    }
+
     const iconStyle = {
       color: "#fff",
       size: '1em',
     }
 
+    const onChangeFile = (e) => {
+      let file = e.target.files[0]
+      console.log(file)
+      setSelectedFile(file)
+    }
+
     const handleLogout = () => {
       setUser(undefined)
+    }
+
+    const handleSubmit = () => {
+      let formData = new FormData()
+      setError(false)
+      const onSuccess = (response) => {
+        let index = response.data.id
+        setProfiles(profiles => profiles.map((profile, i) => profile.id == index ? response.data : profile))
+        setEdit(false)
+        setSelectedFile('')
+      }
+      const onError = (error) => {
+        setError(true)
+        setErrorMessage('An error has occured. Please try again later.')
+      }
+      const config = {
+        headers:{
+          "Content-Type": "multipart/form-data"
+        }
+      };
+      formData.append("name", newName || currentProfile.name)
+      console.log('fil sent ',selectedFile?.name)
+      selectedFile?.name !== undefined && formData.append("profile_img", selectedFile)
+      BackendAPI.put(`/profile/${currentProfile.id}/edit/`, formData, config)
+        .then(onSuccess)
+        .catch(onError)
     }
 
     const renderCurrent = () => {
@@ -58,19 +101,49 @@ export default function Me() {
                   <h3 className='text-white text-4xl text-center font-bold mb-6'>Who's watching ?</h3>
                   <div className='flex'>
                     {profiles.map((profile) => (
-                      <div className='flex flex-col items-center cursor-pointer mr-4' onClick={() => setProfile(profile)}>
+                      <div className='flex flex-col items-center cursor-pointer mr-4 group' onClick={() => setProfile(profile)}>
                         <div className="relative">
-                          <img className="w-24  h-24 ring-2 p-1 ring-gray-100 rounded-full" src={`${API_URL}${profile.profile_img}`} alt={`${user?.name} ${profile.id}`} fill />
+                          <img className="w-24  h-24 ring-2 p-1 ring-gray-100 rounded-full z-10 object-cover" src={`${API_URL}${profile.profile_img}`} alt={`${user?.name} ${profile.id}`} fill />
                           {currentProfile.id === profile.id && renderCurrent()}
                         </div>
                         <div className='mt-4'>
                           <p className='text-lg text-white'>{profile?.name}</p>
                         </div>
+                        <div className='absolute hidden rounded-full h-24 w-24 bg-gray-900/50 items-center justify-center group-hover:flex'>
+                            <div className='flex items-center  border border-white rounded-2xl px-3 py-0'>
+                              <IconContext.Provider value={iconStyle}>
+                                {edit ?
+                                  <IoIosCheckmark color='white' /> : <IoIosBrush color='white' />
+                                }
+                              </IconContext.Provider>
+                              <span className='text-white pl-1 text-md font-medium hover:text-gray-300' onClick={() => {setEdit(!edit)}}>{edit ? `Done` : `Edit`}</span>
+                            </div>
+                        </div>
+                        {edit && currentProfile.id === profile.id && 
+                          <div className='edit flex flex-col'>
+                            <input
+                              type='text'
+                              defaultValue={profile.name}
+                              className='rounded-lg bg-gray-700 text-white  focus:ring-0'
+                              onChange={(e) =>{onChangeName(e)}} 
+                            />
+                            <input
+                              type='file'
+                              className='text-white'
+                              multiple={false}
+                              onChange={(e) => {onChangeFile(e)}}
+                            />
+                            <Button bgColor={'green-300'} additionnalStyle={'w-1/3 self-center text-center'} text='Save' onClick={handleSubmit} />
+                          </div>
+                          
+                        }
                       </div>
                     ))}
                   </div>
+                  {error &&
+                    <p className='text-netflix-red text-lg'>{errorMessage}</p>
+                  }
                   <div className='buttons mt-6'>
-                    <Button text={'Manage profiles'} additionnalStyle={'border border-white'} iconName="edit" iconStyle={iconStyle} />
                     <Button text={'Logout'} additionnalStyle={'border border-white mx-auto'} iconName={'logout'} iconStyle={iconStyle} onClick={handleLogout} />
                   </div>
                 </div>
