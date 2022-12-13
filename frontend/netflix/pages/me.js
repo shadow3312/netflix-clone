@@ -100,9 +100,8 @@ export default function Me() {
 
       // Append form data
       formData.append("name", newName || currentProfile.name)
-      console.log('fil sent ',selectedFile?.name)
       selectedFile?.name !== undefined && formData.append("profile_img", selectedFile)
-      type.length > 0 ? formData.append("type", type) : formData.append("type", "ADULT")
+      type.length > 0 ? formData.append("type", type) : formData.append("type", "1")
       create && formData.append("user_id", user.id)
 
       let edit_url = `/profile/${currentProfile.id}/edit/`
@@ -146,8 +145,8 @@ export default function Me() {
             onChange={(e) =>{onChangeName(e)}} 
           />
           <select onChange={(e) => {onChangeType(e)}}>
-            <option selected={profile?.type==="ADULT"} value="ADULT">Adult</option>
-            <option selected={profile?.type==="KID"} value="KID">Kid</option>
+            <option selected={profile?.type==="ADULT"} value="1">Adult</option>
+            <option selected={profile?.type==="KID"} value="2">Kid</option>
           </select>
           <input
             type='file'
