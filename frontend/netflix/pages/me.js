@@ -145,8 +145,8 @@ export default function Me() {
             onChange={(e) =>{onChangeName(e)}} 
           />
           <select onChange={(e) => {onChangeType(e)}}>
-            <option selected={profile?.type==="ADULT"} value="1">Adult</option>
-            <option selected={profile?.type==="KID"} value="2">Kid</option>
+            <option selected={profile?.type==="ADULT"} value="ADULT">Adult</option>
+            <option selected={profile?.type==="KID"} value="KID">Kid</option>
           </select>
           <input
             type='file'
