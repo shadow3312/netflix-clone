@@ -80,7 +80,7 @@ DATABASES = {
         'NAME': 'netflix-clone',
         'HOST': 'localhost',
         'USER': 'root',
-        'PASSWORD': ''
+        'PASSWORD': config('DB_PASS')
     }
 }
 
