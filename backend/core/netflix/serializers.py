@@ -19,7 +19,8 @@ class UserSerializer(serializers.ModelSerializer):
 
         user = self.Meta.model.objects.create_user(**data)
         if user.id != None:
-            models.Profile.objects.create(name=user.name, user=user)
+            models.Profile.objects.create(
+                name=user.name, user=user, type='ADULT')
 
         return user
 
