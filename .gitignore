@@ -2,6 +2,7 @@ backend/env
 backend/core/core/__pycache__
 backend/core/netflix/__pycache__
 backend/core/netflix/migrations/__pycache__
+backend/core/.env
 frontend/netflix/node_modules
 .vscode/*
 !.vscode/settings.json

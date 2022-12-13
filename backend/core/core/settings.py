@@ -4,18 +4,20 @@ Netflix Clone Backend Settings
 
 from pathlib import Path
 import os
+from decouple import config
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-z($9e8_ekjc(*k1xo7rz5zc^+z%+##bv99#yt$b=@hr8n5bg86'
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [config('HOST')]
 
 CORS_ALLOW_ALL_ORIGINS = True
 
