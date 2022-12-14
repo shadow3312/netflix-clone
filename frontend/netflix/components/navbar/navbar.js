@@ -38,7 +38,7 @@ export default function Navbar() {
                     width={30}
                     height={30}
                     alt="netflix avatar"
-                    className='rounded-full'
+                    className='rounded-full profile__img object-cover'
                 />
             </Link>
         </div>
