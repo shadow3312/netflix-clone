@@ -10,4 +10,4 @@ frontend/netflix/node_modules
 !.vscode/launch.json
 !.vscode/extensions.json
 !.vscode/*.code-snippets
-.env.production
+frontend/netflix/.env.production
