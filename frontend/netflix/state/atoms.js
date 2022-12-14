@@ -11,6 +11,14 @@ const userAtom = atom({
     ]
 })
 
+const LocalMoviesAtom = atom({
+    key: 'local_movies',
+    default: [],
+    effects: [
+        persistAtom
+    ]
+})
+
 const profileAtom = atom({
     key: 'current_profile',
     default: {},
@@ -29,4 +37,4 @@ const selectedMovieAtom = atom({
     default: {}
 })
 
-export {userAtom, showMovieDetailAtom, selectedMovieAtom, profileAtom}
+export {userAtom, showMovieDetailAtom, selectedMovieAtom, profileAtom, LocalMoviesAtom}

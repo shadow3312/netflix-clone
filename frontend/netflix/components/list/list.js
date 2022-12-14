@@ -1,13 +1,16 @@
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 import { IMDBAPI } from '../../pages/api'
+import { LocalMoviesAtom } from '../../state/atoms'
+import {useRecoilState} from 'recoil'
 import Card from '../card/card'
 
-export default function List({title, fetchUrl, isLarge, isRated}) {
+export default function List({title, fetchUrl, isLarge, isRated, local}) {
     const [movies, setMovies] = useState([])
     const [trailer, setTrailer] = useState('')
     const [isError, setError] = useState(false)
     const [errorMessage, setErrorMessage] = useState('')
+    const [localMovies, setLocalMovies] = useRecoilState(LocalMoviesAtom)
 
     const capitalize = (str) => {
         var word = str.toLowerCase().split(' ');
@@ -33,12 +36,18 @@ export default function List({title, fetchUrl, isLarge, isRated}) {
     useEffect(() => {
         fetchMovies(fetchUrl)
     }, [fetchUrl])
+
+    useEffect(() => {
+        if (local) {
+            setMovies(localMovies)
+        }
+    }, [localMovies])
     return (
-        <div className='-mt-6 mb-8'>
+        movies && <div className='-mt-6 mb-8'>
             <h4 className='text-2xl mb-2 text-white font-bold'>{capitalize(title)}</h4>
             <div className='mt-2 overflow-x-scroll overflow-y-hidden list'>
                 <div className='inline-flex  '>
-                {movies.map((movie, i) => (
+                {movies?.map((movie, i) => (
                     <Card key={movie.id} movie={movie} isLarge={isLarge} index={i} isRated={isRated} />
                 ))}
                 </div>

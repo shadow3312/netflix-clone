@@ -23,6 +23,7 @@ export default function Main() {
             <main className="main pl-12 relative" style={{zIndex: 'auto'}}>
                 <List title="trending now" fetchUrl={requests.getTrending} isLarge={true} />
                 <List title="horror movies" fetchUrl={requests.getHorrorMovies} isLarge={true} />
+                <List title="my list" local={true} />
                 <List title="only on netflix" fetchUrl={requests.getNetflixOriginals} isLarge={false} />
                 <List title="action" fetchUrl={requests.getActionMovies} isLarge={true} />
                 <List title="top 10 in France today" fetchUrl={requests.getTopRated} isLarge={false} isRated={true} />
