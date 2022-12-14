@@ -42,7 +42,7 @@ export default function Me() {
     }
     useEffect(() => {
       fetchProfiles()
-    }, [user])
+    }, [])
 
     //#region On Change
 
@@ -67,8 +67,6 @@ export default function Me() {
       color: "#fff",
       size: '1em',
     }
-
-    
 
     const handleLogout = () => {
       setUser(undefined)
@@ -174,7 +172,7 @@ export default function Me() {
           {user?.id ?
             <div className='flex w-screen h-screen items-center justify-center'>
                 <div className='container w-1/2 shadow-xl shadow-indigo-900/20 h-auto py-12 px-8 rounded-lg flex flex-col items-center'>
-                  <h3 className='text-white text-4xl text-center font-bold mb-6'>Who's watching ?</h3>
+                  <h3 className='text-white text-4xl text-center font-bold mb-6'>Who&apos;s watching ?</h3>
                   <div className='flex'>
                     {profiles.map((profile) => (
                       <div className='flex flex-col items-center cursor-pointer mr-4 group' onClick={() => setProfile(profile)}>
