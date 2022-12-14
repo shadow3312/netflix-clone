@@ -175,7 +175,7 @@ export default function Me() {
                   <h3 className='text-white text-4xl text-center font-bold mb-6'>Who&apos;s watching ?</h3>
                   <div className='flex'>
                     {profiles.map((profile) => (
-                      <div className='flex flex-col items-center cursor-pointer mr-4 group' onClick={() => setProfile(profile)}>
+                      <div key={profile.id} className='flex flex-col items-center cursor-pointer mr-4 group' onClick={() => setProfile(profile)}>
                         <div className="relative">
                           <img className="w-24  h-24 ring-2 p-1 ring-gray-100 rounded-full z-10 object-cover" src={`${process.env.NEXT_PUBLIC_API_URL}${profile.profile_img}`} alt={`${user?.name} ${profile.id}`} fill />
                           {currentProfile.id === profile.id && renderCurrent()}
