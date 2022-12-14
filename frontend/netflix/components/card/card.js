@@ -45,23 +45,6 @@ export default function Card({movie, isLarge, isRated, index, local}) {
       temp_array = [...localMovies, movie]
     }
     setLocalMovies(temp_array)
-
-    // localMovies.filter((local_movie, i) => {
-    //     exists = local_movie.id === movie.id && local_movie.profile_id===currentProfile.id
-    //     if (exists) {
-    //       return local_movie.id !== movie.id && local_movie.profile_id!==currentProfile.id 
-    //     }
-    // })
-
-    // if (!exists) {
-    //   movie.profile_id = currentProfile.id
-    //   Object.preventExtensions(movie)
-    //   let temp_array = [...localMovies, movie]
-    //   setLocalMovies(temp_array)
-    // }
-    
-    
-    // localMovies.push(temp_array)
   }
 
   const iconStyle = {
