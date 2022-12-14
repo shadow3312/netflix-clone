@@ -13,7 +13,7 @@ const customLoader = ({ src, width, quality }) => {
   return `https://s3.amazonaws.com/demo/image/${src}?w=${width}&q=${quality || 75}`
 }
 
-export default function Card({movie, isLarge, isRated, index}) {
+export default function Card({movie, isLarge, isRated, index, local}) {
   //#region 
   const router = useRouter()
   const [fill, setFill] = useState(true)
@@ -33,17 +33,32 @@ export default function Card({movie, isLarge, isRated, index}) {
     setSelectedMovie(movie)
   }
 
-  const handleAddToList = (movie) => {
-    let exists = false
-    localMovies.map((local_movie, i) => {
-        exists = local_movie.id === movie.id && local_movie.profile_id===currentProfile.id
-    })
-    if (!exists) {
+  const handleAddOrRemoveToList = (movie) => {
+    // let exists = false
+    let itemIndex = localMovies.findIndex((item) => (item.id === movie.id && item.profile_id === currentProfile.id))
+    let temp_array = []
+    if (itemIndex != -1) {
+      temp_array = localMovies.filter((item, index) => index !== itemIndex)
+    } else {
       movie.profile_id = currentProfile.id
       Object.preventExtensions(movie)
-      let temp_array = [...localMovies, movie]
-      setLocalMovies(temp_array)
+      temp_array = [...localMovies, movie]
     }
+    setLocalMovies(temp_array)
+
+    // localMovies.filter((local_movie, i) => {
+    //     exists = local_movie.id === movie.id && local_movie.profile_id===currentProfile.id
+    //     if (exists) {
+    //       return local_movie.id !== movie.id && local_movie.profile_id!==currentProfile.id 
+    //     }
+    // })
+
+    // if (!exists) {
+    //   movie.profile_id = currentProfile.id
+    //   Object.preventExtensions(movie)
+    //   let temp_array = [...localMovies, movie]
+    //   setLocalMovies(temp_array)
+    // }
     
     
     // localMovies.push(temp_array)
@@ -82,7 +97,7 @@ export default function Card({movie, isLarge, isRated, index}) {
           <h3 className='text-white text-xs font-bold mb-2'>{movie.title || movie.name}</h3>
           <div className='flex z-40'>
             <IconButon bgColor="white" iconStyle={{color: '#000'}} iconName="play" additionnalStyle="pl-2" />
-            <IconButon iconStyle={iconStyle} iconName="plus" onClick={() => handleAddToList(movie)} />
+            <IconButon iconStyle={iconStyle} iconName={local ? 'minus' : 'plus'} onClick={() => handleAddOrRemoveToList(movie)} />
             <IconButon iconStyle={iconStyle} iconName="like" />
             <IconButon iconStyle={iconStyle} iconName="dislike" />
             <IconButon iconStyle={iconStyle} iconName="arrow-down" additionnalStyle="ml-auto" onClick={() => {handleShowDetail()}} />

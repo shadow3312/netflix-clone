@@ -56,12 +56,12 @@ export default function List({title, fetchUrl, isLarge, isRated, local}) {
                         if (movie.profile_id === currentProfile.id)
                         {
                             return (
-                                <Card key={movie.id} movie={movie} isLarge={isLarge} index={i} isRated={isRated} />
+                                <Card key={movie.id} movie={movie} isLarge={isLarge} index={i} isRated={isRated} local={local} />
                             )
                         }
                     } else {
                         return (
-                            <Card key={movie.id} movie={movie} isLarge={isLarge} index={i} isRated={isRated} />
+                            <Card key={movie.id} movie={movie} isLarge={isLarge} index={i} isRated={isRated} local={local} />
                         )
                     }
                 }
