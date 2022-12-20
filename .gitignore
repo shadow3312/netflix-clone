@@ -11,3 +11,5 @@ frontend/netflix/node_modules
 !.vscode/extensions.json
 !.vscode/*.code-snippets
 frontend/netflix/.env.production
+frontend/netflix/.env.development
+
