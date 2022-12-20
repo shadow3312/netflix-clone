@@ -11,6 +11,8 @@ are welcome ;)
 
 Deployed the backend on a private server. The live web demo is <a href="https://netflix-fullstack.vercel.app">here</a>.
 
+If you don't want to create a new account, you can use these credentials to login: email: main@gmail.com, password: 1234
+
 ## Built with
 
 - Backend
