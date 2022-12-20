@@ -39,10 +39,10 @@ export default function MovieDetail() {
                 </IconContext.Provider>
                 </div>
                 <div className='movie_detail bg-cover h-full w-full' style={{backgroundImage: `url(${base_url}${selectedMovie.backdrop_path})`}}></div>
-                <div className="bg-text flex pt-12 grid">
-                    <div className="movie_img sm:h-96 sm:w-1/5 w-1/2 rounded-tl-3xl rounded-br-3xl rounded-tr-md rounded-bl-md border-netflix-black shadow-lg shadow-netflix-black sm:ml-12 bg-cover bg-center bg-no-repeat" style={{backgroundImage: `url(${base_url}${selectedMovie.poster_path})`}}>
+                <div className="bg-text flex pt-12 mobile-only:grid">
+                    <div className="movie_img sm:h-96 sm:w-1/3 w-1/2 rounded-tl-3xl rounded-br-3xl rounded-tr-md rounded-bl-md border-netflix-black shadow-lg shadow-netflix-black sm:ml-12 bg-cover bg-center bg-no-repeat" style={{backgroundImage: `url(${base_url}${selectedMovie.poster_path})`}}>
                     </div>
-                    <div className='movie_desc sm:pl-12 mt-8 w-4/5'>
+                    <div className='movie_desc sm:pl-12 mt-8 w-full'>
                         <div className='flex mb-4'>
                             {processGenres(selectedMovie.genre_ids)}
                         </div>
