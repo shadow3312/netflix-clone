@@ -1,6 +1,6 @@
 # Full stack Netflix Clone
 
-A full stack Netflix clone backed by Python and nailed in frontend by Next.js. I wanted a full control on some critical parts for me, like the user registration and the auth flow, so I didn't want to rely on "pre-made" backends.
+A fully responsive full stack Netflix clone backed by Python and nailed in frontend by Next.js. I wanted a full control on some critical parts for me, like the user registration and the auth flow, so I didn't want to rely on "pre-made" backends.
 
 Stars⭐
 are welcome ;)
@@ -10,8 +10,6 @@ are welcome ;)
 <img src="https://netflix-fullstack.vercel.app/images/demo.png" />
 
 Deployed the backend on a private server. The live web demo is <a href="https://netflix-fullstack.vercel.app">here</a>.
-
-For some reason, I focused on creating a great desktop experience. A more mobile-friendly version will be updated soon.
 
 ## Built with
 
@@ -134,7 +132,7 @@ You're done.
 
 Coming soon
 
-- Create a more mobile friendly experience
+- Create a more mobile friendly experience (Done)
 - Implement the like/dislike functionnality
 
 Feel free to clone, fork, star ⭐, report a bug or <a href="https://www.linkedin.com/in/euloge-amour/">get in touch</a>.
