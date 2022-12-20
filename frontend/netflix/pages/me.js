@@ -173,12 +173,12 @@ export default function Me() {
           <Navbar />
           {user?.id ?
             <div className='flex w-screen h-screen items-center justify-center'>
-                <div className='container w-1/2 shadow-xl shadow-indigo-900/20 h-auto py-12 px-8 rounded-lg flex flex-col items-center'>
+                <div className='container sm:w-1/2 shadow-xl shadow-indigo-900/20 h-auto py-12 sm:px-8 px-0 rounded-lg flex flex-col items-center'>
                   <h3 className='text-white text-4xl text-center font-bold mb-6'>Who&apos;s watching ?</h3>
-                  <div className='flex'>
+                  <div className='flex grid sm:grid-cols-4 grid-cols-2'>
                     {profiles.map((profile) => (
                       <div key={profile.id} className='flex flex-col items-center cursor-pointer mr-4 group' onClick={() => setProfile(profile)}>
-                        <div className="relative">
+                        <div className="relative w-full">
                           <img className="w-24  h-24 ring-2 p-1 ring-gray-100 rounded-full z-10 object-cover" src={`${process.env.NEXT_PUBLIC_API_URL}${profile.profile_img}`} alt={`${user?.name} ${profile.id}`} fill />
                           {currentProfile?.id === profile.id && renderCurrent()}
                           {renderBadge(profile.type)}

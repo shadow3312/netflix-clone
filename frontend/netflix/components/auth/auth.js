@@ -173,8 +173,8 @@ export default function Auth() {
     return (
         <>
             <Header title="Welcome" />
-            <div className='bg-[url(https://preview.redd.it/zjgs096khv591.jpg?width=960&crop=smart&auto=webp&s=ad329047269ea783645bb9d7f58729401ecab873)] bg-cover bg-center h-screen w-screen flex items-center justify-center'>
-                <div className='container bg-black bg-opacity-80 w-1/3 h-auto px-12 py-6 rounded-lg'>
+            <div className='bg-[url(https://preview.redd.it/zjgs096khv591.jpg?width=960&crop=smart&auto=webp&s=ad329047269ea783645bb9d7f58729401ecab873)] bg-cover bg-center h-screen w-screen flex items-center justify-center sm:h-screen'>
+                <div className='container bg-black bg-opacity-80 md:w-1/3 lg:w-1/3 h-auto px-12 py-6 rounded-lg'>
                     <form>
                         <h3 className='text-white text-4xl mb-6 font-bold'>{signIn ? 'Sign In' : 'Sign Up'}</h3>
                         <div className="relative z-0 mb-6 w-full group">

@@ -22,7 +22,7 @@ export default function Navbar() {
     }, [])
     
     return (
-        user?.id && <div className={`nav fixed top-0 mb-32 w-full h-16 ${show && 'bg-netflix-black'} flex pl-12 p-4 justify-between items-center transition-all duration-500 ease-in`} style={{zIndex: 49}}>
+        user?.id && <div className={`nav fixed top-0 mb-32 w-full h-16 ${show && 'bg-netflix-black'} flex sm:pl-12 p-4 justify-between items-center transition-all duration-500 ease-in`} style={{zIndex: 49}}>
             <Link href={'/'}>
                 <Image
                     src="/images/netflix.png"
@@ -32,7 +32,7 @@ export default function Navbar() {
                     className='cursor-pointer fit-contain'
                 />
             </Link>
-            <Link href={'/me'} className='cursor-pointer mr-8'>
+            <Link href={'/me'} className='cursor-pointer sm:mr-8'>
                 <Image
                     src={currentProfile?.profile_img?.length > 0 ? process.env.NEXT_PUBLIC_API_URL+currentProfile?.profile_img : `/images/avatar.png`}
                     width={30}

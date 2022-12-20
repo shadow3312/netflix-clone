@@ -30,8 +30,8 @@ export default function MovieDetail() {
             size="7xl"
             popup={true}
         >
-            <Modal.Body className='h-[80vh] w-full' style={{padding: 0}}>
-                <div className='close absolute right-10 top-5 pr-2 rounded bg-white w-4 h-4  text-white z-50 cursor-pointer' onClick={onClose}>
+            <Modal.Body className='sm:h-[80vh] h-screen w-full overflow-y-scroll' style={{padding: 0}}>
+                <div className='close absolute sm:right-10 right-4 top-5 pr-2 rounded bg-white w-4 h-4  text-white z-50 cursor-pointer' onClick={onClose}>
                 <IconContext.Provider value={{ color: "black", className: "global-class-name" }}>
                     <div>
                         <IoIosClose />
@@ -39,14 +39,14 @@ export default function MovieDetail() {
                 </IconContext.Provider>
                 </div>
                 <div className='movie_detail bg-cover h-full w-full' style={{backgroundImage: `url(${base_url}${selectedMovie.backdrop_path})`}}></div>
-                <div className="bg-text flex pt-12">
-                    <div className="movie_img h-96 w-1/5 rounded-tl-3xl rounded-br-3xl rounded-tr-md rounded-bl-md border-netflix-black shadow-lg shadow-netflix-black ml-12 bg-cover bg-center bg-no-repeat" style={{backgroundImage: `url(${base_url}${selectedMovie.poster_path})`}}>
+                <div className="bg-text flex pt-12 grid">
+                    <div className="movie_img sm:h-96 sm:w-1/5 w-1/2 rounded-tl-3xl rounded-br-3xl rounded-tr-md rounded-bl-md border-netflix-black shadow-lg shadow-netflix-black sm:ml-12 bg-cover bg-center bg-no-repeat" style={{backgroundImage: `url(${base_url}${selectedMovie.poster_path})`}}>
                     </div>
-                    <div className='movie_desc pl-12 mt-8 w-4/5'>
+                    <div className='movie_desc sm:pl-12 mt-8 w-4/5'>
                         <div className='flex mb-4'>
                             {processGenres(selectedMovie.genre_ids)}
                         </div>
-                        <h1 className='text-5xl drop-shadow-6xl shadow-netflix-black text-left mb-4'>{selectedMovie.title || selectedMovie.name}</h1>
+                        <h1 className='sm:text-5xl text-2xl drop-shadow-6xl shadow-netflix-black text-left mb-4'>{selectedMovie.title || selectedMovie.name}</h1>
                         <div className='flex mb-4'>
                             {processRating(selectedMovie.vote_average, selectedMovie.vote_count)}
                         </div>

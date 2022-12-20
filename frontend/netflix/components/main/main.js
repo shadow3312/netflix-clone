@@ -20,7 +20,7 @@ export default function Main() {
             <Header title="Discover" />
             <Navbar />
             <Banner fetchUrl={requests.getTrending} />
-            <main className="main pl-12 relative" style={{zIndex: 'auto'}}>
+            <main className="main pl-4 sm:pl-12 relative" style={{zIndex: 'auto'}}>
                 <List title="trending now" fetchUrl={requests.getTrending} isLarge={true} local={false} />
                 <List title="horror movies" fetchUrl={requests.getHorrorMovies} isLarge={true} local={false} />
                 <List title="my list" local={true} />
