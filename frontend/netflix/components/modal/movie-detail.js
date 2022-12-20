@@ -30,7 +30,7 @@ export default function MovieDetail() {
             size="7xl"
             popup={true}
         >
-            <Modal.Body className='sm:h-[80vh] h-screen w-full overflow-y-scroll' style={{padding: 0}}>
+            <Modal.Body className='sm:h-[80vh] h-screen w-full overflow-y-scroll pb-24' style={{padding: 0}}>
                 <div className='close absolute sm:right-10 right-4 top-5 pr-2 rounded bg-white w-4 h-4  text-white z-50 cursor-pointer' onClick={onClose}>
                 <IconContext.Provider value={{ color: "black", className: "global-class-name" }}>
                     <div>
