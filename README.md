@@ -134,7 +134,7 @@ You're done.
 
 Coming soon
 
-- Create a more mobile friendly experience (Done)
+- ~~Create a more mobile friendly experience (Done)~~
 - Implement the like/dislike functionnality
 
 Feel free to clone, fork, star ⭐, report a bug or <a href="https://www.linkedin.com/in/euloge-amour/">get in touch</a>.
